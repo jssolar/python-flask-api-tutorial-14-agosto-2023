@@ -12,14 +12,43 @@ def hello_world():
 
     return json_text
 
+
+
 @app.route('/todos', methods=['POST'])
 def add_new_todo():
-    request_body = request.data
-    print("Incoming request with the following body", request_body)
-    return 'Response for the POST todo'
+   
+    # request_body = request.json
+    request_body = request.get_json(force=True)
+    todos.append(request_body)
+
+    print("Incoming request with the following body", request_body, todos)
+   
+   
+    return jsonify(todos) 
+
+
+#"""DELETE"""#
+@app.route('/todos/<int:position>', methods=['DELETE'])
+
+def delete_todo(position):
+     id == position
+     todos.pop(position)
+    
+     print("This is the position to delete: ",position)
+    
+     return jsonify(todos)
 
 
 
+
+
+
+# 
+#     request_body = request.get_json(force=True) 
+#     print("Incoming request with the following body", request_body)
+   
+   
+#     return jsonify(todos)
 
 
 if __name__ == '__main__':
